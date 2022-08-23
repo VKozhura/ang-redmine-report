@@ -4,15 +4,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export interface Task {
   id: number;
-  last_name: string;
-  email: string;
-  avatar: any;
+  tracker: {
+    name: string
+  }
 }
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+
 })
 export class AppComponent {
   tasks: any = [];
@@ -41,5 +42,7 @@ export class AppComponent {
 
         this.tasks = response.issues;
       });
+
+      
   }
 }
