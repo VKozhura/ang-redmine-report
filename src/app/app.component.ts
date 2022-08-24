@@ -5,15 +5,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export interface Task {
   id: number;
   tracker: {
-    name: string
-  }
+    name: string;
+  };
 }
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-
 })
 export class AppComponent {
   tasks: any = [];
@@ -34,7 +33,7 @@ export class AppComponent {
 
     this.http
       .get(
-        `https://redmine.bivgroup.com/issues.json?status_id=*&offset=1&limit=100&created_on=%3E%3C${this.startDate}|${this.start2Date}`,
+        `https://redmine.bivgroup.com/issues.json?status_id=*&offset=0&limit=100&created_on=%3E%3C${this.startDate}|${this.start2Date}`,
         options
       )
       .subscribe((response: any) => {
@@ -42,7 +41,5 @@ export class AppComponent {
 
         this.tasks = response.issues;
       });
-
-      
   }
 }
