@@ -1,2 +1,10 @@
-<p>Введите свой токен для аутентификации</p>
-<input class="token-input" type="text" [(ngModel)]="token" />
+<form >
+    <label>Введите свой токен для аутентификации</label>
+    <input class="token-input" type="text" [(ngModel)]="token" />
+    <label>Выберете период для отчета</label>
+    <input type="date" [(ngModel)]="startDate" />
+    <input type="date" [(ngModel)]="start2Date" />
+    <button (click)="getTasks()">Сформировать</button>
+</form>
+
+<p>{{ startDate }}</p>

@@ -1,10 +1,6 @@
 <div>
   <app-auth></app-auth>
-  <p>Выберете период для отчета</p>
-  <input type="date" [(ngModel)]="startDate" />
-  <input type="date" [(ngModel)]="start2Date" />
-  <button (click)="getTasks()">Сформировать</button>
-  <p>{{ startDate }}</p>
+  
 
   <table *ngIf="tasks.length !== 0">
     <thead>
