@@ -15,30 +15,60 @@ export class AuthComponent {
 
   constructor(private redmineService: RedmineService) {}
 
-  getTasks() {
-    console.log(this.tasks.length, this.totalCount);
+  // getTasks() {
+  //   console.log(this.tasks.length, this.totalCount);
 
+  //   this.redmineService
+  //     .getTasks(this.token, this.tasks.length, this.startDate, this.start2Date)
+  //     .subscribe((response: any) => {
+  //       console.log(response);
+
+  //       this.tasks = [...this.tasks, ...response.issues];
+  //       this.totalCount = response.total_count;
+  //       console.log(this.totalCount);
+
+  //       // if (this.tasks.length === response.total_count) {
+  //       //   return 
+  //       // }
+        
+  //         const length: number = this.tasks.length;
+  //       this.redmineService
+  //         .getTasks(this.token, length, this.startDate, this.start2Date)
+  //         .subscribe((response: any) => {
+  //           console.log(response);
+
+  //           this.tasks = [...this.tasks, ...response.issues];
+  //           this.totalCount = response.total_count;
+  //           console.log(this.totalCount);
+  //           console.log(this.tasks);
+  //         });
+        
+
+      
+  //     });
+      
+      
+  // }
+
+  handleClick() {
+    this.getTasks(this.token, 0, this.startDate, this.start2Date);
+  }
+
+  getTasks(token: string, len: number, start: string, end: string) {
     this.redmineService
-      .getTasks(this.token, this.tasks.length, this.startDate, this.start2Date)
+      .getTasks(token, len, start, end)
       .subscribe((response: any) => {
-        console.log(response);
-
         this.tasks = [...this.tasks, ...response.issues];
         this.totalCount = response.total_count;
-        console.log(this.totalCount);
+
+        if (this.tasks.length === response.total_count) {
+          return 
+        } else {
+          this.getTasks(token, this.tasks.length, start, end);
+        }
+      
       });
-
-    while (this.tasks.length < this.totalCount) {
-      const length: number = this.tasks.length + 1;
-      this.redmineService
-        .getTasks(this.token, length, this.startDate, this.start2Date)
-        .subscribe((response: any) => {
-          console.log(response);
-
-          this.tasks = [...this.tasks, ...response.issues];
-          this.totalCount = response.total_count;
-          console.log(this.totalCount);
-        });
-    }
+      
+      
   }
 }
