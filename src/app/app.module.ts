@@ -5,10 +5,11 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthComponent } from './auth/auth.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { TasksListComponent } from './components/tasks-list/tasks-list.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent],
+  declarations: [AppComponent, AuthComponent, TasksListComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
