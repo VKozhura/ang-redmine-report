@@ -16,7 +16,7 @@ export class AuthComponent {
 
   constructor(
     private redmineService: RedmineService,
-    private _tasksService: TasksService
+    public tasksService: TasksService
   ) {}
 
   handleClick() {
@@ -27,15 +27,15 @@ export class AuthComponent {
     this.redmineService
       .getTasks(token, len, start, end)
       .subscribe((response: any) => {
-        this._tasksService.setTasks(response.issues);
+        this.tasksService.setTasks(response.issues);
         // this.tasks = [...this.tasks, ...response.issues];
         this.totalCount = response.total_count;
-        const tasks = this._tasksService.getTasks();
-        console.log(tasks);
-        if (tasks.length === response.total_count) {
+        const tasksLength = this.tasksService.tasks.length;
+        console.log(tasksLength);
+        if (tasksLength === response.total_count) {
           return;
         } else {
-          this.getTasks(token, tasks.length, start, end);
+          this.getTasks(token, tasksLength, start, end);
         }
       });
   }

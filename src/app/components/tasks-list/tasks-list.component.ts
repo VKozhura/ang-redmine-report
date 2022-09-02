@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { concat } from 'rxjs';
 import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
@@ -6,10 +7,21 @@ import { TasksService } from 'src/app/services/tasks.service';
   templateUrl: './tasks-list.component.html',
   styleUrls: ['./tasks-list.component.scss'],
 })
-export class TasksListComponent {
+export class TasksListComponent implements OnInit{
   tasks: any = [];
-  constructor(private tasksService: TasksService) {
-    this.tasksService.getTasks().subscribe((data: any) => (this.tasks = data));
-    console.log(this.tasks);
+  constructor(
+    public tasksService: TasksService,
+    private cdr: ChangeDetectorRef
+  ) {
+    
+  }
+
+  ngOnInit() {
+    concat(this.tasksService.getTasks()).subscribe((data: any) => { 
+      this.tasks = data;
+      console.log(this.tasks);
+      
+      this.cdr.detectChanges();
+    });
   }
 }
