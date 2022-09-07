@@ -1,34 +1,37 @@
-<table *ngIf="tasks.length">
-  <thead>
-    <tr>
-      <th>№ п/п</th>
-      <th>Задача</th>
-      <th>Трекер</th>
-      <th>Тема</th>
-      <th>Статус</th>
-      <th>Приоритет</th>
-      <th>Трудозатраты (в ч.)</th>
-      <th>Создано</th>
-      <th>Закрыто</th>
-      <th>Создано_Решено</th>
-      <th>Интервал</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let task of tasks; let i = index">
-      <th>{{ i + 1 }}</th>
-      <th>{{ task.id }}</th>
-      <th>{{ task.tracker.name }}</th>
-      <th>{{ task.subject }}</th>
-      <th>{{ task.status.name }}</th>
-      <th>{{ task.priority.name }}</th>
-      <th>{{ task.estimated_hours }}</th>
-      <th>{{ task.created_on }}</th>
-      <th>
-        {{ task.closed_on !== null ? task.closed_on : "не закрыта" }}
-      </th>
-      <th></th>
-      <th></th>
-    </tr>
-  </tbody>
-</table>
+<ng-container *ngIf="tasksService.tasks | async as tasks">
+  <table *ngIf="tasks.length">
+    <thead>
+      <tr>
+        <th>№ п/п</th>
+        <th>Задача</th>
+        <th>Трекер</th>
+        <th>Тема</th>
+        <th>Статус</th>
+        <th>Приоритет</th>
+        <th>Трудозатраты (в ч.)</th>
+        <th>Создано</th>
+        <th>Закрыто</th>
+        <th>Создано_Решено</th>
+        <th>Интервал</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks; let i = index">
+        <th>{{ i + 1 }}</th>
+        <th>{{ task.id }}</th>
+        <th>{{ task.tracker.name }}</th>
+        <th>{{ task.subject }}</th>
+        <th>{{ task.status.name }}</th>
+        <th>{{ task.priority.name }}</th>
+        <th>{{ task.estimated_hours }}</th>
+        <th>{{ task.created_on }}</th>
+        <th>
+          {{ task.closed_on !== null ? task.closed_on : "не закрыта" }}
+        </th>
+        <th></th>
+        <th></th>
+      </tr>
+    </tbody>
+  </table>
+  
+</ng-container>

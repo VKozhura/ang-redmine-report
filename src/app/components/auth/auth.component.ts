@@ -27,11 +27,16 @@ export class AuthComponent {
     this.redmineService
       .getTasks(token, len, start, end)
       .subscribe((response: any) => {
-        this.tasksService.setTasks(response.issues);
-        // this.tasks = [...this.tasks, ...response.issues];
+        this.tasksService.tasks.next([...this.tasksService.tasks.value, ...response.issues]);
+        this.tasksService.tasks.subscribe((res) => {
+          console.log("BEHAVIOUR ", res);
+          
+        })
+       
         this.totalCount = response.total_count;
-        const tasksLength = this.tasksService.tasks.length;
+        const tasksLength = this.tasksService.tasks.value.length;
         console.log(tasksLength);
+        console.log(this.tasksService.tasks.value)
         if (tasksLength === response.total_count) {
           return;
         } else {
