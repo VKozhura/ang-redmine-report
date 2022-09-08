@@ -9,9 +9,7 @@ import { TasksService } from 'src/app/services/tasks.service';
 })
 export class TasksListComponent {
  
-  constructor(
-    public tasksService: TasksService,
-  ) {}
+  constructor(public tasksService: TasksService) {}
 
   
 
