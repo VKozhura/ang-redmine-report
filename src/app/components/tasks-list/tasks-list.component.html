@@ -24,7 +24,7 @@
         <th>{{ task.status.name }}</th>
         <th>{{ task.priority.name }}</th>
         <th>{{ task.estimated_hours }}</th>
-        <th>{{ task.created_on | date: 'dd/MM/yyyy hh:mm'}}</th>
+        <th>{{ task.created_on | date: "dd.MM.yyyy HH:MM" }}</th>
         <th>
           {{ task.closed_on !== null ? task.closed_on : "не закрыта" }}
         </th>
@@ -33,6 +33,5 @@
       </tr>
     </tbody>
   </table>
-  
 </ng-container>
 c4bb0c5363355760be678f1ed6e30de09b3495d2
