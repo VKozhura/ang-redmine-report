@@ -11,7 +11,6 @@ export class AuthComponent {
   token: string = '';
   startDate: string = '';
   start2Date: string = '';
- 
 
   constructor(
     private redmineService: RedmineService,
@@ -26,9 +25,11 @@ export class AuthComponent {
     this.redmineService
       .getTasks(token, len, start, end)
       .subscribe((response: any) => {
+        this.tasksService.tasks.next([
+          ...this.tasksService.tasks.value,
+          ...response.issues,
+        ]);
 
-        this.tasksService.tasks.next([...this.tasksService.tasks.value, ...response.issues]);
-       
         const total = response.total_count;
         const tasksLength = this.tasksService.tasks.value.length;
 

@@ -1,0 +1,12 @@
+<label for="tracker-select">Выберете трекер:</label>
+
+<select
+  name="tracker"
+  id="tracker-select"
+  [(ngModel)]="tracker"
+  (ngModelChange)="onSelectTracker($event)"
+>
+  <option *ngFor="let tracker of trackers" [value]="tracker.name">
+    {{ tracker.name }}
+  </option>
+</select>
